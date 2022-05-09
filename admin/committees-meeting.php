@@ -1,0 +1,64 @@
+<?php
+    include_once "includes/session-validation/session-validation.php";
+    require_once "../vendor/autoload.php";
+    $adminID= $_SESSION["user_id"];
+    $admin = new \App\classes\Admin();
+    $committeeData = $admin->getAllCommitteesByAdminID($adminID);
+?>
+
+<?php
+    include_once "includes/head/head.php";
+    include_once "includes/navbar/navbar-top-admin.php";
+    include_once "includes/navbar/navbar-bottom.php";
+    include_once "includes/navbar/navbar-side.php";
+?>
+
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <div class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-12">
+                        <h3 class="m-0 text-center text-dark">Create Meeting for Committee</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Main content -->
+        <section class="content">
+            <div class="row">
+                <div class="col-sm-10 offset-1">
+                    <table class="table table-hover table-bordered">
+                        <thead>
+                        <tr class="bg-info text-center">
+                            <th>Committee Name</th>
+                            <th>Committee Admin</th>
+                            <th>Office</th>
+                            <th>Mail</th>
+                            <th>Phone</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <?php while ($row = mysqli_fetch_assoc($committeeData)) { ?>
+                            <?php if($row["is_active"] != 0 ){?>
+                                <tr class="text-center">
+                                    <td><?php echo $row["committee_name"];?></td>
+                                    <td><?php echo $row["first_name"]." ".$row["last_name"];?></td>
+                                    <td><?php echo $row["office"];?></td>
+                                    <td><?php echo $row["email"];?></td>
+                                    <td><?php echo $row["phone"];?></td>
+                                    <td class="text-center">
+                                       <a href="create-meeting.php?committee_id=<?php echo $row["committee_id"];?>" class="btn btn-primary btn-sm" type="submit">Create Meeting</a>
+                                    </td>
+                                </tr>
+                            <?php }?>
+                        <?php } ?>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </div>
+<?php include_once "includes/bottom/bottom.php"; ?>
