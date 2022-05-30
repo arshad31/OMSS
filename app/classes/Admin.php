@@ -387,12 +387,12 @@ class Admin
             $mail->isSMTP();
             $mail->Host       = 'smtp.gmail.com';
             $mail->SMTPAuth   = true;
-            $mail->Username   = 'arshad.ccodestdnt@gmail.com'; //Here I given my personal email and password
-            $mail->Password   = 'hsc116603';
+            $mail->Username   = 'xxxxxx@xxx.xxx'; //give your email here
+            $mail->Password   = 'xxxxxxx'; //give your email password here
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
             $mail->Port       = 25;
             $mail->SMTPSecure = 'tls';
-            $mail->setFrom('arshad.ccodestdnt@gmail.com', $adminName);
+            $mail->setFrom('xxxxxx@xxx.xxx', $adminName); //give your email here that you have given into 390 no line
             foreach ($committeeUsersEmail as $cUEmail){
                 $mail->addAddress($cUEmail);
             }
