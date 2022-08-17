@@ -1,1 +1,1 @@
-# OMSS
+# Online Meeting Scheduling System
